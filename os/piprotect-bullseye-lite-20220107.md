@@ -37,7 +37,7 @@ Raspberry Pi OS からの変更内容は次のとおりです。
     4gpi-net-mods  
     4gpi-networkmanager  
     mechatrax-archive-keyring  
-    python-sleepi
+    python-sleepi  
     sleepi3-utils  
     sleepi3-monitor  
     sleepi3-firmware
