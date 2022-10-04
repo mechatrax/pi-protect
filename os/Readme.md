@@ -19,7 +19,11 @@ https://github.com/mechatrax/ansible-mechatrax-playbook
 ## 初期ログイン情報カード
 Pi-protect 用 microSD カードに付属している初期ログイン情報カードの .pdf ファイルを公開しています。  
 次のリンクから直接ファイルをダウンロードできます。  
-[初期ログイン情報カード](../../../raw/main/os/login.pdf)
+[初期ログイン情報カード](../../../raw/main/os/login_20221003.pdf)
+
+piprotect-bullseye-lite-20221003 以降のリリースでは初期ユーザーが変更されています。  
+2022/10/3 より前に出荷された製品の初期ログイン情報カードは次のリンクからダウンロードできます。  
+[旧初期ログイン情報カード（20221003リリース前）](../../../raw/main/os/login.pdf)
 
 ## リリースノート
 Pi-protect 用 microSD カードにインストールされている OS イメージのリリースノートを公開しています。
