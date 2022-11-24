@@ -2,6 +2,7 @@ pipeline{
 	agent any
 	environment {
 		TEMP_DIR = '/dev/shm/raspios'
+		POST_CREDS = credentials('c1957e02-a3d9-42e0-9dae-db8ce27974e1')
 	}
 	stages {
 		stage("Checkout GIT") {
@@ -19,7 +20,7 @@ pipeline{
 						if ( ! msg.contains("Release") ) {
 							sh 'curl -s -X POST -u ${JENKINS_USERNAME}:${JENKINS_TOKEN} http://127.0.0.1:8080/job/${JOB_NAME}/${BUILD_NUMBER}/stop'
 						}
-						env.RELEASE_NAME = msg.replaceFirst('Release.*(piprotect-.*)', '$1')
+						env.RELEASE_NAME = msg.replaceFirst('Release.*(piprotect[^ ]+).*', '$1')
 						if ( env.RELEASE_NAME == "" ) {
 							sh 'curl -s -X POST -u ${JENKINS_USERNAME}:${JENKINS_TOKEN} http://127.0.0.1:8080/job/${JOB_NAME}/${BUILD_NUMBER}/stop'
 						}
@@ -34,14 +35,14 @@ pipeline{
 				usernamePassword(credentialsId: 'aa4ddfcc-11d9-418d-b794-8963612b6a78', passwordVariable: 'FTP_PASSWORD', usernameVariable: 'FTP_USERNAME'),
 				string(credentialsId: '0e3efab3-616e-439d-806b-55aac4cd84fd', variable: 'FTP_IP')
 				]) {
-					sh 'curl -sS -T ${TEMP_DIR}/${RELEASE_NAME}.img.xz -u ${FTP_USERNAME}:${FTP_PASSWORD} ftp://${FTP_IP}/data/pi-protect'
+					sh 'curl -sS -T ${TEMP_DIR}/${RELEASE_NAME}.img.xz -u ${FTP_USERNAME}:${FTP_PASSWORD} ftp://${FTP_IP}/data/pi-protect/'
 				}
 			}
 		}
 		stage("Check") {
 			steps {
 				sh 'test -e ${TEMP_DIR}/${RELEASE_NAME}.img.xz && sudo mv ${TEMP_DIR}/${RELEASE_NAME}.img.xz ${TEMP_DIR}/${RELEASE_NAME}.img.xz.orig'
-				sh 'wget -q https://mechatrax.com/data/pi-protect/${RELEASE_NAME}.img.xz -P /dev/shm'
+				sh 'wget -q https://mechatrax.com/data/pi-protect/${RELEASE_NAME}.img.xz -P ${TEMP_DIR}'
 				sh 'sha256sum -c ${TEMP_DIR}/${SUM_FILE}'
 				sh 'sudo rm -vf ${TEMP_DIR}/${RELEASE_NAME}.img.xz ${TEMP_DIR}/${RELEASE_NAME}.img.xz.orig ${TEMP_DIR}/${SUM_FILE}'
 			}
@@ -61,9 +62,6 @@ pipeline{
 			}
 		}
 		*/
-	}
-	environment{
-		POST_CREDS = credentials('c1957e02-a3d9-42e0-9dae-db8ce27974e1')
 	}
 	post {
 		success {
