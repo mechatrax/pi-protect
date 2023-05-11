@@ -28,6 +28,10 @@ piprotect-bullseye-lite-20221003 以降のリリースでは初期ユーザー�
 ## リリースノート
 Pi-protect 用 microSD カードにインストールされている OS イメージのリリースノートを公開しています。
 
+* ### piprotect-bullseye-lite-armhf-20230511
+  2023/05/11  以降に出荷された製品には本リリースの OS イメージがインストールされています。  
+  詳細は、[piprotect-bullseye-lite-armhf-20230511.md](./piprotect-bullseye-lite-armhf-20230511.md) を参照してください。
+
 * ### piprotect-bullseye-lite-armhf-20230403
   2023/04/03  以降に出荷された製品には本リリースの OS イメージがインストールされています。  
   詳細は、[piprotect-bullseye-lite-armhf-20230403.md](./piprotect-bullseye-lite-armhf-20230403.md) を参照してください。
