@@ -1,8 +1,12 @@
+#!/usr/bin/env groovy
+@Library('jenkins-custom-library')_
 pipeline{
 	agent any
 	environment {
 		TEMP_DIR = '/dev/shm/raspios'
-		POST_CREDS = credentials('c1957e02-a3d9-42e0-9dae-db8ce27974e1')
+
+		ZULIP_PROPS = readProperties file: "${WORKSPACE}/properties/zulip_prop"
+		MAIN_STREAM = "${ZULIP_PROPS['MAIN_STREAM']}"
 	}
 	stages {
 		stage("Checkout GIT") {
@@ -24,7 +28,7 @@ pipeline{
 						if ( env.RELEASE_NAME == "" ) {
 							sh 'curl -s -X POST -u ${JENKINS_USERNAME}:${JENKINS_TOKEN} http://127.0.0.1:8080/job/${JOB_NAME}/${BUILD_NUMBER}/stop'
 						}
-						env.SUM_FILE = 'piprotect_lite_armhf.sha256sum'
+						env.SUM_FILE = 'piprotect_lite_arm64.sha256sum'
 					}
 				}
 			}
@@ -47,28 +51,13 @@ pipeline{
 				sh 'sudo rm -vf ${TEMP_DIR}/${RELEASE_NAME}.img.xz ${TEMP_DIR}/${RELEASE_NAME}.img.xz.orig ${TEMP_DIR}/${SUM_FILE}'
 			}
 		}
-		/*
-		stage("Tweet") {
-			when {
-				expression { return RELEASE_NAME != 'none' }
-			}
-			steps {
-				withCredentials([
-					usernamePassword(credentialsId: '5862efc0-4e22-4447-9ac4-af71c72f7fea', passwordVariable: 'APISECRET', usernameVariable: 'API'),
-					usernamePassword(credentialsId: '555f6776-fbe8-4833-b8dd-cf9e4838a7d6', passwordVariable: 'ACCESSSECRET', usernameVariable: 'ACCESS')
-				]) {
-					sh 'python3 -c "from twython import Twython; Twython(\\"${API}\\",\\"${APISECRET}\\",\\"${ACCESS}\\",\\"${ACCESSSECRET}\\").update_status(status=\\"${TWEET_MESSAGE}\\")"'
-				}
-			}
-		}
-		*/
 	}
 	post {
 		success {
-			hangoutsNotify message: "✔ Pi-protect の SD イメージ ${RELEASE_NAME} のリリースに成功しました", token: "${POST_CREDS}", threadByJob: false
+			zulipSend message: "✔ Pi-protect の SD イメージ ${RELEASE_NAME} のリリースに成功しました", stream: "${MAIN_STREAM}"
 		}
 		failure {
-			hangoutsNotify message: "❌ Pi-protect の SD イメージ ${RELEASE_NAME} のリリースに失敗しました", token: "${POST_CREDS}", threadByJob: false
+			zulipSend message: "❌ Pi-protect の SD イメージ ${RELEASE_NAME} のリリースに失敗しました", stream: "${MAIN_STREAM}"
 		}
 	}
 }
