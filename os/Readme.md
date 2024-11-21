@@ -1,6 +1,10 @@
 ## リリースノート
 Pi-protect 用 microSD カードにインストールされている OS イメージのリリースノートを公開しています。
 
+* ### piprotect-bookworm-lite-arm64-20241121
+  2024/11/21  以降に出荷された製品には本リリースの OS イメージがインストールされています。  
+  詳細は、[piprotect-bookworm-lite-arm64-20241121.md](./piprotect-bookworm-lite-arm64-20241121.md) を参照してください。
+
 * ### piprotect-bookworm-lite-arm64-20241111
   2024/11/11  以降に出荷された製品には本リリースの OS イメージがインストールされています。  
   詳細は、[piprotect-bookworm-lite-arm64-20241111.md](./piprotect-bookworm-lite-arm64-20241111.md) を参照してください。
