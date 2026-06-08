@@ -1,6 +1,10 @@
 ## リリースノート
 Pi-protect 用 microSD カードにインストールされている OS イメージのリリースノートを公開しています。
 
+* ### piprotect-trixie-lite-arm64-20260608
+  2026/06/08  以降に出荷された製品には本リリースの OS イメージがインストールされています。  
+  詳細は、[piprotect-trixie-lite-arm64-20260608.md](./piprotect-trixie-lite-arm64-20260608.md) を参照してください。
+
 * ### piprotect-trixie-lite-arm64-20260520
   2026/05/20  以降に出荷された製品には本リリースの OS イメージがインストールされています。  
   詳細は、[piprotect-trixie-lite-arm64-20260520.md](./piprotect-trixie-lite-arm64-20260520.md) を参照してください。
