@@ -1,6 +1,14 @@
 # マニュアル  
 ここでは、Pi-protect の取扱説明書を公開しています。  
 
+## Pi-protect_Manual_261116.pdf  
+2026/11/16 以降に出荷された Pi-protect の取扱説明書です。  
+変更内容  
+・電源管理モジュールを slee-Pi 4 Lite、4G 通信モジュールを 4GPi S に変更  
+・スイッチング電源を TDKLamda ZWS30C-12 に変更  
+次のリンクから直接ファイルをダウンロードできます。  
+[Pi-protect_Manual_261116.pdf](../../../raw/main/manual/Pi-protect_Manual_261116.pdf)
+
 ## Pi-protect_Manual_240117.pdf  
 2024/1/17 以降に出荷された Pi-protect の取扱説明書です。  
 変更内容  
